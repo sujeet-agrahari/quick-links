@@ -1,0 +1,83 @@
+{
+	"info": {
+		"_postman_id": "72022b30-6c5c-4109-9eea-f282f63b4a3b",
+		"name": "QuickLinks",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3664617"
+	},
+	"item": [
+		{
+			"name": "Get Links",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/quick-links",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"quick-links"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Short Link",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"links\":[\"https://hell.co\"]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/quick-links",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"quick-links"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Short Link",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/quick-links?shortLink=ahX300",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"quick-links"
+					],
+					"query": [
+						{
+							"key": "shortLink",
+							"value": "ahX300"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
