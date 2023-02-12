@@ -5,18 +5,22 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { QuickLink } from './quicklink.entity';
 import { Base62Encoder } from './base62-encoder.provider';
 import { QuickLinkSubscriber } from './quicklink.subscriber';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import configuration from './config/configuration.yaml';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'password',
-      database: 'quicklink',
-      entities: [QuickLink],
-      synchronize: true,
+    ConfigModule.forRoot({
+      load: [configuration],
+      isGlobal: true,
+    }),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        ...configService.get('database'),
+        entities: [QuickLink],
+      }),
+      inject: [ConfigService],
     }),
     TypeOrmModule.forFeature([QuickLink]),
   ],
