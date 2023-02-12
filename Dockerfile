@@ -20,4 +20,4 @@ RUN npm install --only=development
 CMD ["npm", "run", "start:dev"]
 
 FROM source as prod
-CMD ["node", "dist/main.js"]
+CMD ["npm", "run", "start:prod"]

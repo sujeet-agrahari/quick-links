@@ -17,8 +17,14 @@ import configuration from './config/configuration.yaml';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        ...configService.get('database'),
+        database: configService.get('DB_NAME'),
+        host: configService.get('DB_HOST'),
+        password: configService.get('DB_PASSWORD'),
+        username: configService.get('DB_USER'),
+        type: 'postgres',
+        port: 5432,
         entities: [QuickLink],
+        synchronize: true,
       }),
       inject: [ConfigService],
     }),

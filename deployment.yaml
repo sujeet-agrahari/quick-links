@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quick-links-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: quick-links
+  template:
+    metadata:
+      labels:
+        app: quick-links
+    spec:
+      hostNetwork: true
+      containers:
+        - name: quick-links
+          image: ghcr.io/sujeet-agrahari/quick-links/quick-link-service:08abdc5ad860986a6e135ae355f9552a93461f7d
+          env:
+            - name: DB_HOST
+              value: 'localhost'
+            - name: DB_USER
+              value: 'postgres'
+            - name: DB_PASSWORD
+              value: 'password'
+            - name: DB_NAME
+              value: 'quicklink'
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: quick-links-service
+spec:
+  selector:
+    app: quick-links
+  ports:
+    - name: quick-links
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

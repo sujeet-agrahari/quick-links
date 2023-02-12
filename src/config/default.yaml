@@ -1,8 +1,5 @@
-database:
-  type: postgres
-  host: localhost
-  port: 5432
-  username: postgres
-  password: password
-  database: quicklink
-  synchronize: true
+DB_HOST: localhost
+port: 5432
+DB_USER: postgres
+DB_PASSWORD: password
+DB_NAME: quicklink
