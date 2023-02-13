@@ -12,6 +12,5 @@ export default () => {
   const environmentConfig = yaml.load(
     readFileSync(join(__dirname, YAML_CONFIG), 'utf8'),
   ) as Record<string, any>;
-
   return { ...defaultConfig, ...environmentConfig, ...process.env };
 };

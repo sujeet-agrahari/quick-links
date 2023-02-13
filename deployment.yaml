@@ -12,19 +12,23 @@ spec:
       labels:
         app: quick-links
     spec:
-      hostNetwork: true
       containers:
         - name: quick-links
-          image: ghcr.io/sujeet-agrahari/quick-links/quick-link-service:08abdc5ad860986a6e135ae355f9552a93461f7d
+          image: quick-link-service:latest
+          imagePullPolicy: Never
           env:
             - name: DB_HOST
-              value: 'localhost'
+              value: 'postgres-postgresql-ha-pgpool'
             - name: DB_USER
               value: 'postgres'
             - name: DB_PASSWORD
               value: 'password'
             - name: DB_NAME
               value: 'quicklink'
+            - name: REDIS_HOST
+              value: 'redis-master'
+            - name: REDIS_PASSWORD
+              value: 'Mx765t6kQe'
 
 ---
 apiVersion: v1
@@ -39,3 +43,4 @@ spec:
       protocol: TCP
       port: 3000
       targetPort: 3000
+  type: LoadBalancer
