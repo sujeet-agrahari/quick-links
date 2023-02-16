@@ -2,12 +2,11 @@
 
 ---
 
-Welcome to the URL Shortner built using Nest.js. This URL Shortner is a powerful and scalable solution that has been designed to make shortening long URLs a breeze. The system has been deployed on a Kubernetes cluster, ensuring high availability and easy scalability. The URL Shortner is also packaged as a Docker image, making it easy to deploy and run in any environment.
+Welcome to the Nest.js URL Shortener GitHub repository! This is a powerful and scalable solution designed to make shortening long URLs a breeze. The system has been deployed on a Kubernetes cluster, ensuring high availability and easy scalability. The URL Shortener utilizes the power of PostgreSQL for data storage and Redis for caching, providing a high-performance and reliable storage solution.
 
-The URL Shortner utilizes the power of PostgreSQL for data storage and Redis for caching, providing a high-performance and reliable storage solution. This combination of technologies ensures that the URL Shortner can handle large amounts of data and traffic with ease, making it the perfect solution for businesses and organizations with high-volume traffic.
+This repository provides an easy-to-deploy, open-source solution for anyone looking to shorten long URLs for social media posts, or those in need of a scalable solution for their business. The codebase is built using the Nest.js framework, which provides a modular and easily extensible architecture.
 
-So whether you're looking to shorten long URLs for social media posts, or you need a scalable solution for your business, the URL Shortner built with Nest.js and deployed on a Kubernetes cluster with PostgreSQL and Redis is the perfect solution for you.
-
+Feel free to explore the codebase and leverage the powerful technologies used in this project for your own URL shortening needs.
 ## Installation
 
 ```bash
