@@ -175,3 +175,5 @@ REDISCLI_AUTH="$REDIS_PASSWORD" redis-cli -h 127.0.0.1 -p 6379
   #If above doesn't work - dashboard-sa => is service account
   kubectl create token dashboard-sa
   ```
+  ---
+  [Kubernetes Introduction](https://github.com/sujeet-agrahari/quick-links/blob/main/kubernetes/Introduction.md)
