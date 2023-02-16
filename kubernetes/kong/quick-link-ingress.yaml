@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: quick-links-ingress
+  annotations:
+    kubernetes.io/ingress.class: kong
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /quick-links
+            pathType: Prefix
+            backend:
+              service:
+                name: quick-links-service
+                port:
+                  name: quick-links

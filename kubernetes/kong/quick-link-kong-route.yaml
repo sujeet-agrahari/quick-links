@@ -1,0 +1,21 @@
+apiVersion: configuration.konghq.com/v1
+kind: KongService
+metadata:
+  name: quick-links-kong-service
+upstream_url: http://quick-links-service:3000
+
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongRoute
+metadata:
+  name: quick-link-route
+spec:
+  hosts:
+    - example.com
+  methods:
+    - GET
+  paths:
+    - /quick-links
+  protocols:
+    - http
+  service: quick-links-kong-service

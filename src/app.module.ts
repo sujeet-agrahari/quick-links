@@ -1,17 +1,16 @@
-import { CacheInterceptor, CacheModule, Module } from '@nestjs/common';
-import { QuickLinkController } from './quicklink.controller';
-import { QuickLinkService } from './quicklink.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { QuickLink } from './quicklink.entity';
-import { Base62Encoder } from './base62-encoder.provider';
-import { QuickLinkSubscriber } from './quicklink.subscriber';
+import { CacheInterceptor, CacheModule, Logger, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import configuration from './config/configuration.yaml';
 import * as redisStore from 'cache-manager-redis-store';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 import { APP_INTERCEPTOR } from '@nestjs/core';
+import { CacheEventModule } from './cache-event/cache-event.module';
+import { QuickLinkModule } from './quick-link/quicklink.module';
 
 @Module({
   imports: [
+    // register core modules
     ConfigModule.forRoot({
       load: [configuration],
       isGlobal: true,
@@ -26,7 +25,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
         username: configService.get('DB_USER'),
         type: 'postgres',
         port: 5432,
-        entities: [QuickLink],
+        autoLoadEntities: true,
         synchronize: true,
         logging: true,
       }),
@@ -41,18 +40,21 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
         password: configService.get('REDIS_PASSWORD'),
       }),
     }),
+    EventEmitterModule.forRoot({
+      delimiter: '.',
+      wildcard: true,
+    }),
+    CacheEventModule,
 
-    TypeOrmModule.forFeature([QuickLink]),
+    // register domain modules
+    QuickLinkModule,
   ],
-  controllers: [QuickLinkController],
   providers: [
-    QuickLinkService,
-    Base62Encoder,
-    QuickLinkSubscriber,
+    Logger,
     {
       provide: APP_INTERCEPTOR,
       useClass: CacheInterceptor,
     },
   ],
 })
-export class QuickLinkModule {}
+export class AppModule {}
