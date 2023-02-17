@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import {
   DataSource,
   EntitySubscriberInterface,
-  InsertEvent,
   LoadEvent,
   Repository,
 } from 'typeorm';

@@ -1,4 +1,4 @@
-import { CacheInterceptor, CacheModule, Logger, Module } from '@nestjs/common';
+import { CacheModule, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import configuration from './config/configuration.yaml';
@@ -7,6 +7,8 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { CacheEventModule } from './cache-event/cache-event.module';
 import { QuickLinkModule } from './quick-link/quicklink.module';
+import { HealthModule } from './health/health.module';
+import { HttpCacheInterceptor } from './cache-event/http-cache.interceptor';
 
 @Module({
   imports: [
@@ -45,15 +47,15 @@ import { QuickLinkModule } from './quick-link/quicklink.module';
       wildcard: true,
     }),
     CacheEventModule,
+    HealthModule,
 
     // register domain modules
     QuickLinkModule,
   ],
   providers: [
-    Logger,
     {
       provide: APP_INTERCEPTOR,
-      useClass: CacheInterceptor,
+      useClass: HttpCacheInterceptor,
     },
   ],
 })
