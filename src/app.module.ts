@@ -5,10 +5,10 @@ import configuration from './config/configuration.yaml';
 import * as redisStore from 'cache-manager-redis-store';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { APP_INTERCEPTOR } from '@nestjs/core';
-import { CacheEventModule } from './cache-event/cache-event.module';
+import { CacheEventModule } from './cache/cache-event.module';
 import { QuickLinkModule } from './quick-link/quicklink.module';
 import { HealthModule } from './health/health.module';
-import { HttpCacheInterceptor } from './cache-event/http-cache.interceptor';
+import { HttpCacheInterceptor } from './cache/http-cache.interceptor';
 
 @Module({
   imports: [

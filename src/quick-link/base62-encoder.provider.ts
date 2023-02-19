@@ -24,7 +24,7 @@ export class Base62Encoder {
       num = Math.floor(num / this.BASE);
     }
 
-    return shortLink.padEnd(6, this.ALPHABET[0]);
+    return shortLink.padEnd(8, this.ALPHABET[0]);
   }
 
   /**
@@ -52,6 +52,6 @@ export class Base62Encoder {
   async getSha256Int(longId) {
     const hash = crypto.createHash('sha256');
     hash.update(longId);
-    return parseInt(hash.digest('hex').substring(0, 6), 16);
+    return parseInt(hash.digest('hex').substring(0, 8), 16);
   }
 }

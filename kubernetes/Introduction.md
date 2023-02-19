@@ -185,4 +185,4 @@ For example, if you specify` -p 80:8080`, this means that the container is liste
 
 ---
 ### Want to learn more?
-(Kubernetes Learning Path)[https://github.com/techiescamp/kubernetes-learning-path]
+[Kubernetes Learning Path](https://github.com/techiescamp/kubernetes-learning-path)
