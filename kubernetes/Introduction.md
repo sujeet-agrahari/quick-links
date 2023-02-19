@@ -182,5 +182,6 @@ To remember which is the internal and which is the external port, you can use th
 The first port number (before the colon) represents the port on the host machine, and the second port number (after the colon) represents the port on the container.
 You can remember this by thinking of **_the colon as a gateway_** or a separator between the host and container ports.
 For example, if you specify` -p 80:8080`, this means that the container is listening on port 8080, and the port is exposed to the host machine on port 80.
+---
 ### Want to learn more?
-          (Kubernetes Learning Path)[https://github.com/techiescamp/kubernetes-learning-path]
+(Kubernetes Learning Path)[https://github.com/techiescamp/kubernetes-learning-path]
