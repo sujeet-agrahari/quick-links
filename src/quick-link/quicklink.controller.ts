@@ -1,14 +1,4 @@
-import {
-  Body,
-  CACHE_MANAGER,
-  Controller,
-  Get,
-  Inject,
-  Param,
-  Post,
-  Query,
-  Redirect,
-} from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Redirect } from '@nestjs/common';
 import { QuickLinkService } from './quicklink.service';
 import { IncomingLinksDto } from './dto/incoming-links.dto';
 import { QuickLinkDto } from './dto/quicklink.dto';
@@ -46,6 +36,7 @@ export class QuickLinkController {
   async shortLinks(
     @Body() linkData: IncomingLinksDto,
   ): Promise<QuickLinkDto[]> {
+    console.log(linkData);
     const result = await this.quickLinkService.createNewQuickLinks(
       linkData.links,
     );

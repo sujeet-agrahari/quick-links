@@ -9,13 +9,14 @@ import { CacheEventModule } from './cache/cache-event.module';
 import { QuickLinkModule } from './quick-link/quicklink.module';
 import { HealthModule } from './health/health.module';
 import { HttpCacheInterceptor } from './cache/http-cache.interceptor';
-
+import configurationSchema from './config/configuration.schema';
 @Module({
   imports: [
     // register core modules
     ConfigModule.forRoot({
       load: [configuration],
       isGlobal: true,
+      validationSchema: configurationSchema,
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
