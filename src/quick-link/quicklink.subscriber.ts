@@ -30,6 +30,6 @@ export class QuickLinkSubscriber
     entity: QuickLink,
     event?: LoadEvent<QuickLink>,
   ): void | Promise<any> {
-    event.entity.redirectLink = `https://quicklinks.com/${entity.shortLink}`;
+    event.entity.redirectLink = `http://localhost:3000/${entity.shortLink}`;
   }
 }

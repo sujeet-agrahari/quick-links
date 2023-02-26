@@ -4,35 +4,40 @@ import {
   Controller,
   Get,
   Inject,
+  Param,
   Post,
   Query,
+  Redirect,
 } from '@nestjs/common';
 import { QuickLinkService } from './quicklink.service';
 import { IncomingLinksDto } from './dto/incoming-links.dto';
 import { QuickLinkDto } from './dto/quicklink.dto';
-import { ApiBody, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
-import { Cache } from 'cache-manager';
+import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { EventEmitter2 } from '@nestjs/event-emitter';
+import { RedirectResponseDto } from './dto/redirect-response.dto';
 
 @ApiTags('Quick Link')
 @Controller('quick-links')
 export class QuickLinkController {
   constructor(
     private readonly quickLinkService: QuickLinkService,
-    @Inject(CACHE_MANAGER) private cacheManagerService: Cache,
     private eventEmitter: EventEmitter2,
   ) {}
 
   @Get()
-  @ApiOperation({ summary: 'Get actual link by shortLink' })
-  @ApiQuery({ name: 'shortLink', required: false })
+  @ApiOperation({ summary: 'Get all links' })
+  async getLinks(): Promise<QuickLinkDto[]> {
+    return this.quickLinkService.getLinks();
+  }
+
+  @Get(':shortLink')
+  @Redirect()
+  @ApiOperation({ summary: 'Redirect on actual link' })
   async getActualLink(
-    @Query('shortLink') shortLink: string,
-  ): Promise<QuickLinkDto | Array<QuickLinkDto>> {
-    if (!shortLink) {
-      return this.quickLinkService.getLinks();
-    }
-    return this.quickLinkService.getActualLink(shortLink);
+    @Param('shortLink') shortLink: string,
+  ): Promise<RedirectResponseDto> {
+    const { actualLink } = await this.quickLinkService.getActualLink(shortLink);
+    return { url: actualLink };
   }
 
   @Post()

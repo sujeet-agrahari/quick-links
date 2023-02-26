@@ -4,6 +4,5 @@ DB_NAME: quicklink
 DB_USER: postgres
 
 REDIS_HOST: localhost
-REDIS_PASSWORD: 'Mx765t6kQe'
 
 DOMAIN_URL: http://localhost:3001/api/v1
