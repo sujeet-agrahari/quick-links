@@ -7,6 +7,7 @@ Welcome to the Nest.js URL Shortener GitHub repository! This is a powerful and s
 This repository provides an easy-to-deploy, open-source solution for anyone looking to shorten long URLs for social media posts, or those in need of a scalable solution for their business. The codebase is built using the Nest.js framework, which provides a modular and easily extensible architecture.
 
 Feel free to explore the codebase and leverage the powerful technologies used in this project for your own URL shortening needs.
+
 ## Installation
 
 ```bash
@@ -37,6 +38,15 @@ $ npm run test:e2e
 
 # test coverage
 $ npm run test:cov
+```
+
+## Debug
+
+```bash
+# unit tests
+$ npm run start:debug
+
+# after the server is running, go to vscode debug icon and click on "Attach NestJS WS"
 ```
 
 ## Setup Kubernetes
@@ -175,5 +185,7 @@ REDISCLI_AUTH="$REDIS_PASSWORD" redis-cli -h 127.0.0.1 -p 6379
   #If above doesn't work - dashboard-sa => is service account
   kubectl create token dashboard-sa
   ```
-  ---
+
+  ***
+
   [Kubernetes Introduction](https://github.com/sujeet-agrahari/quick-links/blob/main/kubernetes/Introduction.md)
