@@ -27,7 +27,7 @@ import configurationSchema from './config/configuration.schema';
         password: configService.get('DB_PASSWORD'),
         username: configService.get('DB_USER'),
         type: 'postgres',
-        port: 5432,
+        port: configService.get('DB_PORT'),
         autoLoadEntities: true,
         synchronize: true,
         logging: true,

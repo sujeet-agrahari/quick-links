@@ -9,7 +9,7 @@ import {
 import { Cache } from 'cache-manager';
 
 @Injectable()
-export class AppHealthIndicator extends HealthIndicator {
+export class HealthService extends HealthIndicator {
   constructor(
     @Inject(CACHE_MANAGER) private cacheService: Cache,
     private typeOrm: TypeOrmHealthIndicator,

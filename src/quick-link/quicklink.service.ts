@@ -52,7 +52,7 @@ export class QuickLinkService {
       },
     });
     if (!foundLink) {
-      throw new NotFoundException();
+      throw new NotFoundException(`No actual link found for ${shortLink}`);
     }
     return foundLink;
   }
