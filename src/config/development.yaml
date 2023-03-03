@@ -1,6 +1,6 @@
 DB_HOST: localhost
 DB_PASSWORD: password
-DB_NAME: quicklink
+DB_NAME: postgres
 DB_USER: postgres
 DB_PORT: 5432
 

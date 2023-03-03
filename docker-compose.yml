@@ -15,3 +15,11 @@ services:
       - '5433:5432'
     environment:
       POSTGRES_PASSWORD: password
+  redis:
+    image: redis:alpine
+    command: redis-server
+    ports:
+      - 6379:6379
+    volumes:
+      - ./data:/data
+    restart: always
