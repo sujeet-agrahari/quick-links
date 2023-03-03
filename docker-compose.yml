@@ -8,6 +8,14 @@ services:
       - '5432:5432'
     environment:
       POSTGRES_PASSWORD: password
+  redis:
+    image: redis:alpine
+    command: redis-server
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./data:/data
+    restart: always
   test-db:
     image: postgres
     restart: always
@@ -15,11 +23,11 @@ services:
       - '5433:5432'
     environment:
       POSTGRES_PASSWORD: password
-  redis:
+  test-redis:
     image: redis:alpine
     command: redis-server
     ports:
-      - 6379:6379
+      - '6379:6379'
     volumes:
       - ./data:/data
     restart: always

@@ -17,6 +17,9 @@ $ npm install
 ## Running the app
 
 ```bash
+# run redis and postgres
+$ docker-compose up -d db redis
+
 # development
 $ npm run start
 
@@ -34,6 +37,7 @@ $ npm run start:prod
 $ npm run test
 
 # e2e tests
+# it will also start redis and postgres for testing
 $ npm run test:e2e
 
 # test coverage
