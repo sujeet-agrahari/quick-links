@@ -8,6 +8,9 @@ This repository provides an easy-to-deploy, open-source solution for anyone look
 
 Feel free to explore the codebase and leverage the powerful technologies used in this project for your own URL shortening needs.
 
+## Database setup
+The directory named **dbschema** includes a file named `quick-links.sql`, which contains the PostgreSQL database schema. The schema can also be viewed as an image.
+![Quick Links Database Schema](dbschema/quick-links.png)
 ## Installation
 
 ```bash
