@@ -1,6 +1,5 @@
 export class QuickLinkDto {
   actualLink: string;
-  shortLink?: string;
-  isActive?: boolean;
+  shortLink: string;
   redirectLink?: string;
 }

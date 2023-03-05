@@ -20,9 +20,6 @@ export class QuickLink {
   @Column({ select: false, nullable: true })
   redirectLink?: string;
 
-  @Column({ default: true })
-  isActive: boolean;
-
   @CreateDateColumn()
   createdAt: Date;
 

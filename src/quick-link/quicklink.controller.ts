@@ -1,12 +1,12 @@
 import { Body, Controller, Get, Param, Post, Redirect } from '@nestjs/common';
 import { QuickLinkService } from './quicklink.service';
-import { IncomingLinksDto } from './dto/incoming-links.dto';
+import { CreateQuickLinkDto } from './dto/create-quicklink.dto';
 import { QuickLinkDto } from './dto/quicklink.dto';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { RedirectResponseDto } from './dto/redirect-response.dto';
 import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags('quick-links')
+@ApiTags('Quick Links')
 @Controller('quick-links')
 export class QuickLinkController {
   constructor(
@@ -30,7 +30,7 @@ export class QuickLinkController {
 
   @Post()
   async shortLinks(
-    @Body() linkData: IncomingLinksDto,
+    @Body() linkData: CreateQuickLinkDto,
   ): Promise<QuickLinkDto[]> {
     console.log(linkData);
     const result = await this.quickLinkService.createNewQuickLinks(

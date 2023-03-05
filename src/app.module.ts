@@ -9,6 +9,9 @@ import { CacheEventModule } from './cache/cache-event.module';
 import { QuickLinkModule } from './quick-link/quicklink.module';
 import { HealthModule } from './health/health.module';
 import { HttpCacheInterceptor } from './cache/http-cache.interceptor';
+import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
+import { RoleModule } from './role/role.module';
 import configurationSchema from './config/configuration.schema';
 @Module({
   imports: [
@@ -41,6 +44,7 @@ import configurationSchema from './config/configuration.schema';
         store: redisStore,
         host: configService.get('REDIS_HOST'),
         password: configService.get('REDIS_PASSWORD'),
+        ttl: 30, // seconds
       }),
     }),
     EventEmitterModule.forRoot({
@@ -52,6 +56,12 @@ import configurationSchema from './config/configuration.schema';
 
     // register domain modules
     QuickLinkModule,
+
+    UserModule,
+
+    AuthModule,
+
+    RoleModule,
   ],
   providers: [
     {

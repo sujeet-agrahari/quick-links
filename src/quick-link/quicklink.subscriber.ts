@@ -1,24 +1,12 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import {
-  DataSource,
-  EntitySubscriberInterface,
-  LoadEvent,
-  Repository,
-} from 'typeorm';
-import { Base62Encoder } from './base62-encoder.provider';
+import { Injectable } from '@nestjs/common';
+import { DataSource, EntitySubscriberInterface, LoadEvent } from 'typeorm';
 import { QuickLink } from './quicklink.entity';
 
 @Injectable()
 export class QuickLinkSubscriber
   implements EntitySubscriberInterface<QuickLink>
 {
-  constructor(
-    datasource: DataSource,
-    @Inject(Base62Encoder) private readonly base62Encoder: Base62Encoder,
-    @InjectRepository(QuickLink)
-    private readonly quickLinkRepository: Repository<QuickLink>,
-  ) {
+  constructor(datasource: DataSource) {
     datasource.subscribers.push(this);
   }
 

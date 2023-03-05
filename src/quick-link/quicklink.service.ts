@@ -9,25 +9,25 @@ import { QuickLink } from './quicklink.entity';
 export class QuickLinkService {
   constructor(
     @InjectRepository(QuickLink)
-    private quickLinkRepository: Repository<QuickLink>,
+    private readonly quickLinkRepository: Repository<QuickLink>,
     @Inject(Base62Encoder)
-    private base62Encoder: Base62Encoder,
+    private readonly base62Encoder: Base62Encoder,
   ) {}
   /**
-   * It returns a promise that resolves to an array of QuickLinkDto objects
-   * @returns An array of QuickLinkDto objects
+   * It returns a promise that resolves to an array of QuickLink objects
+   * @returns An array of QuickLink objects
    */
-  async getLinks(): Promise<Array<QuickLinkDto>> {
+  async getLinks(): Promise<Array<QuickLink>> {
     return this.quickLinkRepository.find();
   }
   /**
    * It takes an array of links, encodes them, finds the existing links, filters the new links, saves the
    * new links, and returns the new and existing links
    * @param {string[]} links - string[] - The original links that the user entered
-   * @returns An array of QuickLinkDto objects.
+   * @returns An array of QuickLink objects.
    */
 
-  async createNewQuickLinks(links: string[]): Promise<QuickLinkDto[]> {
+  async createNewQuickLinks(links: string[]): Promise<QuickLink[]> {
     const encodedLinks = await this.encodeLinks(links);
     const existingLinks = await this.findExistingLinks(encodedLinks);
 
@@ -91,7 +91,7 @@ export class QuickLinkService {
    * function.
    * @param {QuickLink[]} existingLinks - QuickLink[] - this is the list of existing links that we have
    * in the database.
-   * @returns An array of QuickLinkDto objects.
+   * @returns An array of QuickLink objects.
    */
   private filterNewLinks(
     links: string[],

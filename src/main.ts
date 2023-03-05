@@ -21,11 +21,15 @@ async function bootstrap() {
     .setTitle('Quick Links')
     .setDescription('Generate Quick Links')
     .setVersion('1.0')
-    .addTag('quick-links')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   // expose swagger docs at /api
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('api', app, document, {
+    swaggerOptions: {
+      tagsSorter: 'alpha',
+      operationsSorter: 'alpha',
+    },
+  });
 
   await app.listen(3000);
 }
