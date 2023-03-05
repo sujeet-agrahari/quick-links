@@ -4,6 +4,7 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -18,9 +19,6 @@ export class Auth {
   @Column()
   email: string;
 
-  @Column({ type: 'varchar', unique: true, nullable: true })
-  username: string;
-
   @Column()
   password: string;
 
@@ -28,7 +26,7 @@ export class Auth {
   user: User;
 
   @JoinColumn()
-  @OneToOne(() => Role, { nullable: false })
+  @ManyToOne(() => Role)
   role: Role;
 
   @CreateDateColumn()

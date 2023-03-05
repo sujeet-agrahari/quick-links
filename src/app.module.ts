@@ -56,11 +56,8 @@ import configurationSchema from './config/configuration.schema';
 
     // register domain modules
     QuickLinkModule,
-
     UserModule,
-
     AuthModule,
-
     RoleModule,
   ],
   providers: [

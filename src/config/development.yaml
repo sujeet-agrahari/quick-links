@@ -1,9 +1,16 @@
+# Database
 DB_HOST: localhost
 DB_PASSWORD: password
 DB_NAME: postgres
 DB_USER: postgres
 DB_PORT: 5432
 
+# Redis
 REDIS_HOST: localhost
+
+# JWT
+JWT_SECRET: supersecret
+JWT_SIGN_OPTION:
+  expiresIn: '1h'
 
 DOMAIN_URL: http://localhost:3001/api/v1

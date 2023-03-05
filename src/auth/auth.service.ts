@@ -1,14 +1,15 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RoleService } from 'src/role/role.service';
-import { FindOptionsWhere, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { Auth } from './auth.entity';
 import { CreateAuthDto } from './dto/create-auth.dto';
-
-interface FindAuthDetailsOptions {
-  username?: string;
-  email?: string;
-}
+import { PasswordService } from './password.service';
 
 @Injectable()
 export class AuthService {
@@ -16,29 +17,24 @@ export class AuthService {
     @InjectRepository(Auth)
     private readonly authRepository: Repository<Auth>,
     private readonly roleService: RoleService,
+    private readonly passwordService: PasswordService,
+    private readonly jwtService: JwtService,
   ) {}
 
   /**
    *Finds an Auth entity based on the provided email or username.
-   *@param options - An object that can contain either an email or a username property.
-   *@returns A Promise that resolves to an Auth entity if one is found, or undefined if not.
+   *@param email - User email.
+   *@returns A Promise that resolves to an Auth entity if one is found.
+   * @throws BadRequestException if the user not found
    */
-  async findAuthDetails(
-    options: FindAuthDetailsOptions,
-  ): Promise<Auth | undefined> {
-    const where: FindOptionsWhere<Auth> = {};
+  async findAuthDetailByEmail(email: string): Promise<Auth> {
+    const authDetail = await this.authRepository.findOne({
+      where: {
+        email,
+      },
+    });
 
-    if (options.email) {
-      where.email = options.email;
-    }
-
-    if (options.username) {
-      where.username = options.username;
-    }
-
-    const auth = await this.authRepository.findOne({ where });
-
-    return auth;
+    return authDetail;
   }
 
   /**
@@ -50,9 +46,7 @@ export class AuthService {
    */
   async registerUser(createAuthDto: CreateAuthDto): Promise<Auth> {
     // check if user already exists
-    const existingUser = await this.findAuthDetails({
-      email: createAuthDto.email,
-    });
+    const existingUser = await this.findAuthDetailByEmail(createAuthDto.email);
     if (existingUser) {
       throw new BadRequestException('User already registered, please login!');
     }
@@ -69,5 +63,28 @@ export class AuthService {
 
     // save the Auth entity and return it
     return this.authRepository.save(auth);
+  }
+
+  async validateUser(email: string, password: string): Promise<Auth> {
+    const existingUser = await this.findAuthDetailByEmail(email);
+    if (!existingUser) {
+      throw new NotFoundException('Account not found');
+    }
+    if (
+      !(await this.passwordService.comparePassword(
+        password,
+        existingUser.password,
+      ))
+    ) {
+      return null;
+    }
+    return existingUser;
+  }
+
+  async loginUser(authDetail: Auth) {
+    const payload = { email: authDetail.email, sub: authDetail.id };
+    return {
+      accessToken: this.jwtService.sign(payload),
+    };
   }
 }
