@@ -1,0 +1,19 @@
+name: Analyze code statically
+'on': push
+jobs:
+  brakeman:
+    runs-on: ubuntu-latest
+    env:
+      ANALYZER: '@moneyforward/code-review-action-brakeman-plugin'
+      ANALYZER_VERSION: '~0'
+    steps:
+      - uses: actions/checkout@v2
+      - run: sudo npm i -g --no-save "${ANALYZER}@${ANALYZER_VERSION}"
+      - id: node-env
+        run: echo "::set-output name=path::$(npm root -g)"
+      - name: Code review action
+        uses: moneyforward/code-review-action@v0.1.0
+        env:
+          NODE_PATH: ${{ steps.node-env.outputs.path }}
+        with:
+          analyzer: ${{ env.ANALYZER }}
