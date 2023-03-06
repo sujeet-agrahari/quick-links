@@ -7,8 +7,8 @@ import {
 } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { validate, ValidationError } from 'class-validator';
-import { AuthService } from './auth.service';
-import { LoginDto } from './dto/login.dto';
+import { AuthService } from '../auth.service';
+import { LoginDto } from '../dto/login.dto';
 
 export class ValidateLoginGuard implements CanActivate {
   constructor(private readonly authService: AuthService) {}

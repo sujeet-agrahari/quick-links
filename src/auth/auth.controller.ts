@@ -3,9 +3,9 @@ import { ApiTags } from '@nestjs/swagger';
 import { Auth } from './auth.entity';
 import { AuthService } from './auth.service';
 import { CreateAuthDto } from './dto/create-auth.dto';
-import { LocalAuthGuard } from './local-auth.guard';
-import { AuthenticatedRequest } from './type/authenticated-request.type';
-import { ValidateLoginGuard } from './validate-login.guard';
+import { LocalAuthGuard } from './guards/local-auth.guard';
+import { AuthenticatedRequest } from './types/authenticated-request.type';
+import { ValidateLoginGuard } from './guards/validate-login.guard';
 
 @ApiTags('Auth')
 @Controller('auth')
