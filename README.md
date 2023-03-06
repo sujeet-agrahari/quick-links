@@ -53,6 +53,23 @@ $ npm run test:cov
 
 ## Debug
 
+Add below configuration in `launch.json` vscode.
+
+```
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Attach NestJS WS",
+      "port": 9229,
+      "restart": true
+    }
+  ]
+}
+```
+
 ```bash
 # unit tests
 $ npm run start:debug
