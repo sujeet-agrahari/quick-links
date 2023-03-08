@@ -54,4 +54,14 @@ export class Base62Encoder {
     hash.update(longId);
     return parseInt(hash.digest('hex').substring(0, 8), 16);
   }
+
+  /**
+   * It takes an array of links, encodes each link, and returns an array of encoded links
+   * @param {string[]} links - string[] - an array of links to be encoded
+   * @returns An array of strings.
+   */
+  async encodeLinks(links: string[]): Promise<string[]> {
+    const encodedShortLinkPromises = links.map((link) => this.encode(link));
+    return Promise.all(encodedShortLinkPromises);
+  }
 }

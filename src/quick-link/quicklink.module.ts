@@ -16,5 +16,6 @@ import { EventEmitter2 } from '@nestjs/event-emitter';
     QuickLinkSubscriber,
     EventEmitter2,
   ],
+  exports: [QuickLinkService],
 })
 export class QuickLinkModule {}

@@ -6,8 +6,10 @@ import { CreateAuthDto } from './dto/create-auth.dto';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { AuthenticatedRequest } from './types/authenticated-request.type';
 import { ValidateLoginGuard } from './guards/validate-login.guard';
+import { Public } from './guards/public.guard';
 
 @ApiTags('Auth')
+@Public()
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}

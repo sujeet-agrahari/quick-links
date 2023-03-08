@@ -25,6 +25,9 @@ export class QuickLink {
   @ManyToOne(() => User, (user) => user.quickLinks)
   user: User;
 
+  @Column({ type: 'uuid', nullable: true })
+  userId: string;
+
   @CreateDateColumn()
   createdAt: Date;
 

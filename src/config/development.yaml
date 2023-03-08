@@ -11,6 +11,6 @@ REDIS_HOST: localhost
 # JWT
 JWT_SECRET: supersecret
 JWT_SIGN_OPTION:
-  expiresIn: '1h'
+  expiresIn: '2343h'
 
 DOMAIN_URL: http://localhost:3001/api/v1

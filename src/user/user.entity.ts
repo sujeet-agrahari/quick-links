@@ -23,8 +23,8 @@ export class User {
   lastName: string;
 
   /* Creating a one to one relationship between the User and Auth entities. */
-  @OneToOne(() => Auth, (auth) => auth.user)
   @JoinColumn()
+  @OneToOne(() => Auth, (auth) => auth.user, { nullable: false })
   auth: Auth;
 
   @OneToMany(() => QuickLink, (quickLink) => quickLink.user)

@@ -6,8 +6,10 @@ import { EventEmitter2 } from '@nestjs/event-emitter';
 import { RedirectResponseDto } from './dto/redirect-response.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { SkipThrottle } from '@nestjs/throttler';
+import { Public } from 'src/auth/guards/public.guard';
 
 @ApiTags('Quick Links')
+@Public()
 @Controller('quick-links')
 export class QuickLinkController {
   constructor(
@@ -15,13 +17,8 @@ export class QuickLinkController {
     private eventEmitter: EventEmitter2,
   ) {}
 
-  @Get()
-  @SkipThrottle() // request is already, no need to throttle
-  async getLinks(): Promise<QuickLinkDto[]> {
-    return this.quickLinkService.getLinks();
-  }
-
   @Get(':shortLink')
+  @SkipThrottle()
   @Redirect()
   async getActualLink(
     @Param('shortLink') shortLink: string,
@@ -34,9 +31,8 @@ export class QuickLinkController {
   async shortLinks(
     @Body() linkData: CreateQuickLinkDto,
   ): Promise<QuickLinkDto[]> {
-    console.log(linkData);
-    const result = await this.quickLinkService.createNewQuickLinks(
-      linkData.links,
+    const result = await this.quickLinkService.createNewQuickLink(
+      linkData.link,
     );
     /* Deleting the cache for the `/quick-links` endpoint.
      * API shouldn't fail in case of cache deletion failure

@@ -14,6 +14,7 @@ import { AuthModule } from './auth/auth.module';
 import { RoleModule } from './role/role.module';
 import configurationSchema from './config/configuration.schema';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { JwtGuard } from './auth/guards/jwt-auth.guard';
 @Module({
   imports: [
     // register core modules
@@ -56,7 +57,7 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
     HealthModule,
     ThrottlerModule.forRoot({
       ttl: 60, //seconds
-      limit: 2, // 30 calls on an endpoint
+      limit: 30, // 30 calls on an endpoint
     }),
 
     // register domain modules
@@ -73,6 +74,10 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
     {
       provide: APP_GUARD, // implement throttling on all routes, for skipping on any route we will use @SkipThrottle()
       useClass: ThrottlerGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: JwtGuard,
     },
   ],
 })

@@ -28,13 +28,14 @@ export class AuthService {
    * @throws BadRequestException if the user not found
    */
   async findAuthDetailByEmail(email: string): Promise<Auth> {
-    const authDetail = await this.authRepository.findOne({
+    const userAuth = await this.authRepository.findOne({
       where: {
         email,
       },
+      relations: ['user'],
     });
 
-    return authDetail;
+    return userAuth;
   }
 
   /**
@@ -81,8 +82,8 @@ export class AuthService {
     return existingUser;
   }
 
-  async loginUser(authDetail: Auth) {
-    const payload = { email: authDetail.email, sub: authDetail.id };
+  async loginUser(userAuth: Auth) {
+    const payload = { email: userAuth.email, sub: userAuth.user.id };
     return {
       accessToken: this.jwtService.sign(payload),
     };
