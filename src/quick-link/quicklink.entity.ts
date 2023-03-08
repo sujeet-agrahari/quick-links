@@ -1,9 +1,11 @@
+import { User } from 'src/user/user.entity';
 import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
 } from 'typeorm';
 
 @Entity()
@@ -19,6 +21,9 @@ export class QuickLink {
 
   @Column({ select: false, nullable: true })
   redirectLink?: string;
+
+  @ManyToOne(() => User, (user) => user.quickLinks)
+  user: User;
 
   @CreateDateColumn()
   createdAt: Date;
