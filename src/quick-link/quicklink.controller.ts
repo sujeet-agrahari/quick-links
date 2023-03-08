@@ -5,6 +5,7 @@ import { QuickLinkDto } from './dto/quicklink.dto';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { RedirectResponseDto } from './dto/redirect-response.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { SkipThrottle } from '@nestjs/throttler';
 
 @ApiTags('Quick Links')
 @Controller('quick-links')
@@ -15,6 +16,7 @@ export class QuickLinkController {
   ) {}
 
   @Get()
+  @SkipThrottle() // request is already, no need to throttle
   async getLinks(): Promise<QuickLinkDto[]> {
     return this.quickLinkService.getLinks();
   }
