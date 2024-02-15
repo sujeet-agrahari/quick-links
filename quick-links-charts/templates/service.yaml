@@ -4,9 +4,9 @@ metadata:
   name: {{ .Values.service.name }}
 spec:
   selector:
-    app: quick-links
+    app: {{ .Values.app_name }}
   ports:
-    - name: quick-links
+    - name: {{ .Values.app_name }}
       protocol: TCP
       port: {{ .Values.service.port }}
       targetPort: {{ .Values.service.port }}

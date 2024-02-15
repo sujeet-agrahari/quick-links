@@ -1,17 +1,20 @@
-replicaCount: 2
-image:
-  repository: quick-links
-  tag: dev
-  pullPolicy: Never
-env:
-  DB_HOST: 'postgres-postgresql-ha-pgpool'
-  DB_USER: 'postgres'
-  DB_PASSWORD: 'password'
-  DB_NAME: 'quicklink'
-  REDIS_HOST: 'redis-master'
-  REDIS_PASSWORD: 'Mx765t6kQe'
+app_name: quick-links
+
 deployment:
   name: quick-links-deployment
+  replicaCount: 2
+  image:
+    repository: quick-links
+    tag: prod
+    pullPolicy: Never
+  env:
+    DB_HOST: 'postgres-postgresql-ha-pgpool'
+    DB_USER: 'postgres'
+    DB_PASSWORD: 'password'
+    DB_NAME: 'quicklink'
+    REDIS_HOST: 'redis-master'
+    REDIS_PASSWORD: 'pyL9vFnIpw'
+
 service:
   name: quick-links-service
   type: ClusterIP

@@ -1,33 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}-quick-links
+  name: {{ .Values.deployment.name }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.deployment.replicaCount }}
   selector:
     matchLabels:
-      app: quick-links
+      app: {{.Values.app_name }}
   template:
     metadata:
       labels:
-        app: quick-links
+        app: {{.Values.app_name }}
     spec:
       containers:
-        - name: quick-links
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+        - name: {{.Values.app_name }}
+          image: "{{ .Values.deployment.image.repository }}:{{ .Values.deployment.image.tag }}"
+          imagePullPolicy: {{ .Values.deployment.image.pullPolicy }}
           env: 
-            - name: DB_HOST
-              value: {{ .Values.env.DB_HOST }}
-            - name: DB_PORT
-              value: {{ .Values.env.DB_PORT }}
-            - name: DB_USER
-              value: {{ .Values.env.DB_USER }}
-            - name: DB_PASSWORD
-              value: {{ .Values.env.DB_PASSWORD }}
-            - name: DB_NAME
-              value: {{ .Values.env.DB_NAME }}
-            - name: REDIS_HOST
-              value: {{ .Values.env.REDIS_HOST }}
-            - name: REDIS_PASSWORD
-              value: {{ .Values.env.REDIS_PASSWORD }}
+          {{- range $key, $value := .Values.deployment.env }}
+            - name: {{ $key }}
+              value: {{ quote $value }}
+          {{- end }}

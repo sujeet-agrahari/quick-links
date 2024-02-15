@@ -1,4 +1,4 @@
 apiVersion: v2
-name: quick-links-chart
+name: quick-links
 description: A Helm chart for deploying quick-links service
 version: 0.1.0

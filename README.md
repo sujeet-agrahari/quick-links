@@ -217,3 +217,12 @@ REDISCLI_AUTH="$REDIS_PASSWORD" redis-cli -h 127.0.0.1 -p 6379
   ***
 
   [Kubernetes Introduction](https://github.com/sujeet-agrahari/quick-links/blob/main/kubernetes/Introduction.md)
+
+### Helm
+
+```
+helm upgrade quick-links ./quick-links-charts
+
+helm upgrade quick-links ./quick-links-charts --recreate-pods
+
+```
