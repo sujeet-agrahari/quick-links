@@ -10,14 +10,14 @@ import { UserService } from './user.service';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Get('/:userId/quick-links')
+  @Get('/quick-links')
   async getUserQuickLinks(
     @Request() { user }: AuthenticatedRequest,
   ): Promise<User[]> {
     return this.userService.getUserQuickLinks(user.id);
   }
 
-  @Post('/:userId/quick-links')
+  @Post('/quick-links')
   async createUserQuickLinks(
     @Request() { user }: AuthenticatedRequest,
     @Body() { links }: CreateQuickLinksDto,

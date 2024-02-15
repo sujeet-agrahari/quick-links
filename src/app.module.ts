@@ -15,6 +15,7 @@ import { RoleModule } from './role/role.module';
 import configurationSchema from './config/configuration.schema';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { JwtGuard } from './auth/guards/jwt-auth.guard';
+import { DataSource } from 'typeorm';
 @Module({
   imports: [
     // register core modules
@@ -81,4 +82,6 @@ import { JwtGuard } from './auth/guards/jwt-auth.guard';
     },
   ],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private dataSource: DataSource) {}
+}

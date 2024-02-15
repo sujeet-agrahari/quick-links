@@ -1,14 +1,14 @@
-import { Injectable } from '@nestjs/common';
 import {
   DataSource,
   EntitySubscriberInterface,
+  EventSubscriber,
   InsertEvent,
   UpdateEvent,
 } from 'typeorm';
 import { Auth } from './auth.entity';
 import { PasswordService } from './password.service';
 
-@Injectable()
+@EventSubscriber()
 export class AuthSubscriber implements EntitySubscriberInterface<Auth> {
   constructor(
     datasource: DataSource,

@@ -80,7 +80,6 @@ describe('HealthService', () => {
       const cacheError = new Error('Failed to get cache');
       cacheService.get.mockRejectedValue(cacheError);
       const result = await healthService.checkCache();
-      console.log(result);
       expect(result).toEqual(expected);
     });
   });

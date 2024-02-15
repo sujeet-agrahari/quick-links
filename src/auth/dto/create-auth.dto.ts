@@ -1,6 +1,7 @@
 import { Type } from 'class-transformer';
 import { IsEmail, IsString, Matches, ValidateNested } from 'class-validator';
 import { CreateRoleDto } from '../../role/dto/create-role.dto';
+import { CreateUserDto } from 'src/user/dto/create-user.dto';
 
 export class CreateAuthDto {
   @IsString()
@@ -19,4 +20,8 @@ export class CreateAuthDto {
   @ValidateNested()
   @Type(() => CreateRoleDto)
   role: CreateRoleDto;
+
+  @ValidateNested()
+  @Type(() => CreateUserDto)
+  user: CreateUserDto;
 }
