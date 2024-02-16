@@ -13,7 +13,26 @@
 					"name": "getRoles",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lLnJnY3NtQGRmc3NkZmFzZmZpLmNvbSIsInN1YiI6Ijc4NGQ3YWVkLTRkYTctNDgxMS04MGRlLTdjOGNmN2E2ZmJmZCIsImlhdCI6MTcwODA4ODA1NiwiZXhwIjoxNzE2NTIyODU2fQ.0634vGqliYD25kOzK727eU1msaInUlX4Tde7qW2vNxA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/roles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"roles"
+							]
+						}
 					},
 					"response": []
 				}
@@ -34,7 +53,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/v1/users/784d7aed-4da7-4811-80de-7c8cf7a6fbfd/quick-links",
+							"raw": "{{host}}/api/v1/users/quick-links",
 							"host": [
 								"{{host}}"
 							],
@@ -42,7 +61,6 @@
 								"api",
 								"v1",
 								"users",
-								"784d7aed-4da7-4811-80de-7c8cf7a6fbfd",
 								"quick-links"
 							]
 						}
@@ -56,7 +74,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer {{token}}",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lLnJnY3NtQGRmc3NkZmFzZmZpLmNvbSIsInN1YiI6Ijc4NGQ3YWVkLTRkYTctNDgxMS04MGRlLTdjOGNmN2E2ZmJmZCIsImlhdCI6MTcwODA4ODA1NiwiZXhwIjoxNzE2NTIyODU2fQ.0634vGqliYD25kOzK727eU1msaInUlX4Tde7qW2vNxA",
 								"type": "text"
 							},
 							{
@@ -70,15 +88,16 @@
 							"raw": "{\n    \"links\": [\n        \"https://example.com\",\n        \"https://example2.com\"\n    ]\n}"
 						},
 						"url": {
-							"raw": "{{host}}/api/v1/users/{{userId}}/quick-links",
+							"raw": "http://localhost:3000/api/v1/users/quick-links",
+							"protocol": "http",
 							"host": [
-								"{{host}}"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
 								"api",
 								"v1",
 								"users",
-								"{{userId}}",
 								"quick-links"
 							]
 						}
@@ -210,31 +229,6 @@
 						"api",
 						"v1",
 						"quick-links"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Short Link",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3001/quick-links?shortLink=LpAi00",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3001",
-					"path": [
-						"quick-links"
-					],
-					"query": [
-						{
-							"key": "shortLink",
-							"value": "LpAi00"
-						}
 					]
 				}
 			},
