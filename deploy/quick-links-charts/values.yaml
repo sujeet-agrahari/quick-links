@@ -5,7 +5,7 @@ deployment:
   replicaCount: 2
   image:
     repository: quick-links
-    tag: prod
+    tag: dev
     pullPolicy: Never
   env:
     DB_HOST: 'postgres-postgresql-ha-pgpool'

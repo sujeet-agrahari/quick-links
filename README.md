@@ -192,17 +192,37 @@ REDISCLI_AUTH="$REDIS_PASSWORD" redis-cli -h 127.0.0.1 -p 6379
 
 ### Setup Kubernetes Dashboard
 
+#### Using Helm
+
+```sh
+helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
+helm upgrade --install kubernetes-dashboard kubernetes-dashboard/kubernetes-dashboard --create-namespace --namespace kubernetes-dashboard
+
+```
+
+Get the Kubernetes Dashboard URL by running:
+
+```sh
+  export POD_NAME=$(kubectl get pods -n kubernetes-dashboard -l "app.kubernetes.io/name=kubernetes-dashboard,app.kubernetes.io/instance=kubernetes-dashboard" -o jsonpath="{.items[0].metadata.name}")
+  echo https://127.0.0.1:8443/
+  kubectl -n kubernetes-dashboard port-forward $POD_NAME 8443:8443
+```
+
+#### Without Using Helm
+
 - Create a service account
+
   ```sh
-  kubectl apply -f ./kubernetes/service-accounts/k8s-dashboard.service-account.yaml
+  kubectl apply -f kubernetes/k8s-dashboard/k8s-dashboard.service-account.yaml
   ```
+
 - Create cluster-level role binding
   ```sh
   kubectl apply -f ./kubernetes/service-accounts/k8s-cluster-level.role-binding.yaml
   ```
   We can also create a role-binding for a namespace
   ```sh
-  kubectl apply -f ./kubernetes/service-accounts/k8s-dashboard.role-binding.yaml
+  kubectl apply -f kubernetes/k8s-dashboard/k8s-dashboard.role-binding.yaml
   ```
 - Generate access token for a service account
 

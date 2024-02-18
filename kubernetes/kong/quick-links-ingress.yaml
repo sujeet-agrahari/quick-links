@@ -1,19 +1,14 @@
 apiVersion: networking.k8s.io/v1
-kind: IngressClass
-metadata:
-  name: kong
-spec:
-  controller: ingress-controllers.konghq.com/kong
----
-apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: quick-links-ingress
   annotations:
-    kubernetes.io/ingress.class: kong
+    kubernetes.io/ingress.class: 'kong'
+    konghq.com/strip-path: 'true'
 spec:
   rules:
-    - http:
+    - host: localhost
+      http:
         paths:
           - path: /quick-links
             pathType: Prefix
@@ -21,4 +16,4 @@ spec:
               service:
                 name: quick-links-service
                 port:
-                  name: quick-links
+                  number: 3000

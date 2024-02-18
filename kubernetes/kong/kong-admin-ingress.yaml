@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kong-admin-ingress
+  annotations:
+    kubernetes.io/ingress.class: 'kong'
+    konghq.com/strip-path: 'true'
+spec:
+  rules:
+    - host: localhost
+      http:
+        paths:
+          - path: /kong-admin
+            pathType: Prefix
+            backend:
+              service:
+                name: kong-kong-admin
+                port:
+                  number: 8001

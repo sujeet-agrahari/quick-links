@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kubernetes-dashboard-ingress
+  annotations:
+    kubernetes.io/ingress.class: 'kong'
+    konghq.com/strip-path: 'true'
+    namespace: kubernetes-dashboard
+spec:
+  rules:
+    - host: localhost
+      http:
+        paths:
+          - path: /dashboard
+            pathType: Prefix
+            backend:
+              service:
+                name: kubernetes-dashboard
+                port:
+                  number: 80
