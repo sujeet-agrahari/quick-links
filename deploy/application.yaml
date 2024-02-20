@@ -8,18 +8,16 @@ spec:
   source:
     repoURL: https://github.com/sujeet-agrahari/quick-links.git
     targetRevision: HEAD
-    path: deploy/quick-links-charts
+    path: deploy
+    helm:
+      valueFiles:
+        - values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: quick-links
   syncPolicy:
-    syncOptions:
-    - CreateNamespace=true
-    automated: true
-      selfHeal: true
+    automated:
       prune: true
-
-
-
-
-
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
