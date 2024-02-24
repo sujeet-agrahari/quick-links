@@ -5,15 +5,16 @@ deployment:
   replicaCount: 2
   image:
     repository: quick-links
-    tag: argocd
+    tag: dev
     pullPolicy: Never
   env:
-    DB_HOST: 'postgres-postgresql-ha-pgpool'
+    NODE_ENV: 'development'
+    DB_HOST: 'postgres-postgresql-ha-pgpool.postgres.svc.cluster.local'
     DB_USER: 'postgres'
     DB_PASSWORD: 'password'
     DB_NAME: 'quicklink'
-    REDIS_HOST: 'redis-master'
-    REDIS_PASSWORD: 'pyL9vFnIpw'
+    REDIS_HOST: 'redis-master.redis.svc.cluster.local'
+    REDIS_PASSWORD: 'password'
 
 service:
   name: quick-links-service
