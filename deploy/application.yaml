@@ -11,7 +11,7 @@ spec:
     path: deploy
     helm:
       valueFiles:
-        - /env-values/dev-values.yaml
+        - ./values/dev.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: quick-links

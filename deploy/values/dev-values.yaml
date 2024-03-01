@@ -5,8 +5,8 @@ deployment:
   replicaCount: 2
   image:
     repository: quick-links
-    tag: dev
-    pullPolicy: Never
+    tag: 0.0.1
+    pullPolicy: IfNotPresent
   env:
     NODE_ENV: 'development'
     DB_HOST: 'postgres-postgresql-ha-pgpool.postgres.svc.cluster.local'
