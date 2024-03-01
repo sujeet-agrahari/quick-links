@@ -51,4 +51,4 @@ CMD ["npm", "run", "start:dev"]
 FROM source as prod
 
 # Command to run production server
-CMD ["npm", "run", "start:prod"]
+CMD ["node", "dist/main.js"]
