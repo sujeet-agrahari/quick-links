@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { RoleService } from 'src/role/role.service';
+import { RoleService } from '../role/role.service';
 import { Repository } from 'typeorm';
 import { Auth } from './auth.entity';
 import { CreateAuthDto } from './dto/create-auth.dto';

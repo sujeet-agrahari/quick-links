@@ -1,5 +1,5 @@
-import { Auth } from 'src/auth/auth.entity';
-import { QuickLink } from 'src/quick-link/quicklink.entity';
+import { Auth } from '../auth/auth.entity';
+import { QuickLink } from '../quick-link/quicklink.entity';
 import {
   Column,
   CreateDateColumn,

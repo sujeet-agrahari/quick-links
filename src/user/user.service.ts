@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateQuickLinksDto } from 'src/quick-link/dto/create-quicklinks.dto';
 
-import { QuickLinkService } from 'src/quick-link/quicklink.service';
+import { QuickLinkService } from '../quick-link/quicklink.service';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
 
