@@ -50,5 +50,9 @@ CMD ["npm", "run", "start:dev"]
 # Production stage
 FROM source as prod
 
+# Build production code
+
+RUN npm run build
+
 # Command to run production server
 CMD ["node", "dist/main.js"]
