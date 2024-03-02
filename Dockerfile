@@ -4,7 +4,6 @@ FROM node:20-slim as base
 # Set NODE_ENV environment variable to production
 ENV NODE_ENV=production
 
-
 # don't know why nest isn't available on path even it's part of deps
 RUN npm i -g @nestjs/cli
 
@@ -32,8 +31,6 @@ COPY --chown=node:node . .
 
 # Development stage
 FROM base as dev
-
-
 
 # Set NODE_ENV environment variable to development
 ENV NODE_ENV=development
