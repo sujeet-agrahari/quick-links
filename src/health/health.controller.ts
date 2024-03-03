@@ -18,4 +18,12 @@ export class HealthController {
       () => this.healthService.isHealthy('quick-links'),
     ]);
   }
+
+  @Get('/status')
+  async getVersion(): Promise<{ status: string; version: string }> {
+    return {
+      status: 'OK',
+      version: process.env.npm_package_version,
+    };
+  }
 }
