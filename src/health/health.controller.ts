@@ -3,6 +3,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { HealthCheck, HealthCheckService } from '@nestjs/terminus';
 import { HealthService } from './health.service';
 import { Public } from 'src/auth/guards/public.guard';
+import { ConfigService } from '@nestjs/config';
 
 @ApiTags('Health')
 @Public()
@@ -11,6 +12,7 @@ export class HealthController {
   constructor(
     private health: HealthCheckService,
     private healthService: HealthService,
+    private configService: ConfigService,
   ) {}
 
   @Get()
@@ -25,7 +27,9 @@ export class HealthController {
   async getVersion(): Promise<{ status: string; version: string }> {
     return {
       status: 'OK',
-      version: process.env.npm_package_version,
+      version:
+        this.configService.get('APP_VERSION') ||
+        process.env.npm_package_version,
     };
   }
 }
