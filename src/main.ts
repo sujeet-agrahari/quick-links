@@ -13,7 +13,10 @@ async function bootstrap() {
     }),
   );
   app.setGlobalPrefix('/api/v1', {
-    exclude: [{ path: '/health', method: RequestMethod.GET }],
+    exclude: [
+      { path: '/health', method: RequestMethod.GET },
+      { path: '/health/status', method: RequestMethod.GET },
+    ],
   });
 
   /* This is setting up the swagger documentation for the API. */

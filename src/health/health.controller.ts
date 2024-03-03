@@ -21,7 +21,7 @@ export class HealthController {
     ]);
   }
 
-  @Get('/status')
+  @Get('status')
   async getVersion(): Promise<{ status: string; version: string }> {
     return {
       status: 'OK',
