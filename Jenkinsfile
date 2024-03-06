@@ -14,7 +14,7 @@ pipeline {
     }
     
     stages {
-        stage('Checkout') {
+        stage('Preparation') {
             steps {
                     git branch: 'main',
                         credentialsId: 'github_jenkins_token',
@@ -41,7 +41,7 @@ pipeline {
             }
         }
         
-        stage('Push Docker Image to GitHub Packages') {
+        stage('Push Docker Image to Registry(ECR)') {
             steps {
                 script {
                     // Authenticate with GitHub Packages
