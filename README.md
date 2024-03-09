@@ -12,6 +12,8 @@ Feel free to explore the codebase and leverage the powerful technologies used in
 > To practice important concepts first follow [kubernetes-playground](./kubernetes-playground.md)
 >
 > For step wise guidelines please follow [Step Wise Guidelines](./step-wise-guideline.md)
+>
+> The charts for the deployment are hosted at [quick-links-charts](https://github.com/sujeet-agrahari/quick-links-chart)
 
 ## Database setup
 
