@@ -9,6 +9,8 @@ This repository provides an easy-to-deploy, open-source solution for anyone look
 Feel free to explore the codebase and leverage the powerful technologies used in this project for your own URL shortening needs.
 
 > [!IMPORTANT]  
+> Learn about kubernetes in depth through the slides [Kubernetes](https://docs.google.com/presentation/d/1b_qoklJet4gUJBTFMud9JVrgqwGvI_uPyR1qWGcfDfk/edit?usp=sharing)
+>
 > To practice important concepts first follow [kubernetes-playground](./kubernetes-playground.md)
 >
 > For step wise guidelines please follow [Step Wise Guidelines](./step-wise-guideline.md)
