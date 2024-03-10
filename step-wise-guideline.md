@@ -211,6 +211,7 @@ Follow these steps to configure a Jenkins Pipeline for your GitHub repository:
 
    - In the configuration settings for the `Build and Push` item (Multibranch Pipeline), add the branch source for your repository.
    - This tells Jenkins which repository and branches to monitor for changes and build triggers.
+     ![Pipeline](./dbschema/image2.png)
 
 8. Go to Manage Jenkins and install plugin NodeJS Plugin:
 
