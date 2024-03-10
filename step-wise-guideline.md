@@ -135,6 +135,11 @@ kubectl get secrets -n argocd argocd-initial-admin-secret -o yaml
 echo NkZoc3E0RW45OTZDRDlJdg== | base64 --decode
 # user will be admin only
 
+# Make argocd to poll within given time
+# Change argocd-cm config map, add below at the level of metadata
+# data:
+#  timeout.reconciliation: 30s
+
 ```
 
 ## Create Ingress for accessing service via Kong
@@ -154,3 +159,68 @@ docker build . --target dev -t quick-links:dev
 
 kubectl apply -f deploy/application.yaml
 ```
+
+## Setting up Jenkins Pipeline with GitHub Integration
+
+```sh
+brew install jenkins
+
+brew services start jenkins
+
+# Go to http://localhost:8080/ get the password from cat /Users/userName/.jenkins/secrets/initialAdminPassword
+```
+
+Follow these steps to configure a Jenkins Pipeline for your GitHub repository:
+
+1. Go to Jenkins Dashboard.
+
+2. Create a New Item:
+
+   - Navigate to the Jenkins Dashboard.
+   - Click on the "New Item" option in the left-hand side menu.
+
+3. Give Name `quick-links` and choose folder:
+   - Provide a name for your new item, such as "quick-links".
+   - Choose the appropriate folder or organization where you want to place this item.
+   - Click on the "OK" or "Apply" button to proceed.
+
+![Create New Item](./dbschema/image.png)
+
+4. Create a new item inside this folder:
+
+   - Name it `Build and Push`.
+   - Choose the type of item as `Multibranch Pipeline`.
+   - This allows Jenkins to automatically discover branches in your repository and create pipelines for each branch.
+
+5. Generate a new personal auth token in GitHub:
+
+   - Go to your GitHub account settings.
+   - Under "Developer settings", click on "Personal access tokens".
+   - Generate a new token with the necessary permissions.
+   - Use this token as the password when adding Git credentials in Jenkins.
+
+6. Go to Credentials and add Git credentials:
+   - Navigate to the Jenkins Dashboard.
+   - Click on "Credentials" from the left-hand side menu.
+   - Click on "Add credentials" and fill in the required fields.
+   - Use the generated personal access token from GitHub as the password.
+
+![Add credentials](./dbschema/image.png)
+
+7. Add the branch source in the multiple pipeline configuration:
+
+   - In the configuration settings for the `Build and Push` item (Multibranch Pipeline), add the branch source for your repository.
+   - This tells Jenkins which repository and branches to monitor for changes and build triggers.
+
+8. Go to Manage Jenkins and install plugin NodeJS Plugin:
+
+   - From the Jenkins Dashboard, navigate to "Manage Jenkins".
+   - Click on "Manage Plugins" and install the "NodeJS Plugin".
+   - Search for it in the available plugins list and select it for installation.
+
+9. Enable the Nodejs tool:
+   - After installing the NodeJS Plugin, go back to "Manage Jenkins" and click on "Global Tool Configuration".
+   - Here, you can enable the Node.js tool by adding a new installation.
+   - Specify the desired version and ensure that the checkbox for "Install automatically" is selected.
+
+![Enable Nodejs](./dbschema/image1.png)
