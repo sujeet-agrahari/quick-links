@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: quick-links-argocd-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/sujeet-agrahari/quick-links.git
+    targetRevision: HEAD
+    path: deploy
+    helm:
+      valueFiles:
+        - ./values/dev.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: quick-links
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

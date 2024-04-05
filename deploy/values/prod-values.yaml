@@ -1,0 +1,22 @@
+app_name: quick-links
+
+deployment:
+  name: quick-links-deployment
+  replicaCount: 2
+  image:
+    repository: quick-links
+    tag: prod
+    pullPolicy: IfNotPresent
+  env:
+    NODE_ENV: 'production'
+    DB_HOST: 'postgres-postgresql-ha-pgpool.postgres.svc.cluster.local'
+    DB_USER: 'postgres'
+    DB_PASSWORD: 'password'
+    DB_NAME: 'quicklink'
+    REDIS_HOST: 'redis-master.redis.svc.cluster.local'
+    REDIS_PASSWORD: 'password'
+
+service:
+  name: quick-links-service
+  type: ClusterIP
+  port: 3000

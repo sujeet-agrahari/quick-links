@@ -1,0 +1,17 @@
+# Database
+DB_HOST: localhost
+DB_PASSWORD: password
+DB_NAME: quicklink
+DB_USER: postgres
+DB_PORT: 5432
+
+# Redis
+REDIS_HOST: localhost
+REDIS_PASSWORD: pyL9vFnIpw
+
+# JWT
+JWT_SECRET: supersecret
+JWT_SIGN_OPTION:
+  expiresIn: '2343h'
+
+DOMAIN_URL: http://localhost:3001/api/v1

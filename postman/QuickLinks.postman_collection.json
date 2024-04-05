@@ -1,0 +1,238 @@
+{
+	"info": {
+		"_postman_id": "72022b30-6c5c-4109-9eea-f282f63b4a3b",
+		"name": "QuickLinks",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3664617"
+	},
+	"item": [
+		{
+			"name": "role",
+			"item": [
+				{
+					"name": "getRoles",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lLnJnY3NtQGRmc3NkZmFzZmZpLmNvbSIsInN1YiI6Ijc4NGQ3YWVkLTRkYTctNDgxMS04MGRlLTdjOGNmN2E2ZmJmZCIsImlhdCI6MTcwODA4ODA1NiwiZXhwIjoxNzE2NTIyODU2fQ.0634vGqliYD25kOzK727eU1msaInUlX4Tde7qW2vNxA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/roles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "getQuickLinks",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lLnJnY3NtQGRmc3NkZmFzZmZpLmNvbSIsInN1YiI6Ijc4NGQ3YWVkLTRkYTctNDgxMS04MGRlLTdjOGNmN2E2ZmJmZCIsImlhdCI6MTcwNzk2ODI3NCwiZXhwIjoxNzE2NDAzMDc0fQ.ygXslTXVumPsy3pQMr5xajzvXzjytIHmINuSXGbmlxY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/v1/users/quick-links",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"quick-links"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "shortLink",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lLnJnY3NtQGRmc3NkZmFzZmZpLmNvbSIsInN1YiI6Ijc4NGQ3YWVkLTRkYTctNDgxMS04MGRlLTdjOGNmN2E2ZmJmZCIsImlhdCI6MTcwODA4ODA1NiwiZXhwIjoxNzE2NTIyODU2fQ.0634vGqliYD25kOzK727eU1msaInUlX4Tde7qW2vNxA",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"links\": [\n        \"https://example.com\",\n        \"https://example2.com\"\n    ]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/users/quick-links",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"quick-links"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "registerUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"me.rgcsm@dfssdfasffi.com\",\n    \"password\": \"Hello@Sujeet8\",\n        \"role\": {\n            \"name\": \"User\"\n    },\n    \"user\": {\n        \"firstName\": \"sujeet\",\n        \"lastName\": \"hello\"\n    }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "loginUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer asdfsadf",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"me.rgcsm@dfssdfasffi.com\",\n    \"password\": \"Hello@Sujeet8\"\n}\n"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Links",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/quick-links/39LDS100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"quick-links",
+						"39LDS100"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Short Link",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"link\":\"https://www.facebook.com\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/quick-links",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"quick-links"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

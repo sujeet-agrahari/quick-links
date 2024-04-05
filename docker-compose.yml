@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_PASSWORD: password
+  redis:
+    image: redis:alpine
+    command: redis-server
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./data:/data
+    restart: always
+  test-db:
+    image: postgres
+    restart: always
+    ports:
+      - '5433:5432'
+    environment:
+      POSTGRES_PASSWORD: password
+  test-redis:
+    image: redis:alpine
+    command: redis-server
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./data:/data
+    restart: always
+  quick-links:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    environment:
+      NODE_ENV: production
+    depends_on:
+      - db
+      - redis

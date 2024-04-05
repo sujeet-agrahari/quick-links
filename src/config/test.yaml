@@ -1,0 +1,8 @@
+DB_HOST: localhost
+DB_PASSWORD: password
+DB_NAME: quicklink
+DB_USER: postgres
+DB_PORT: 5433
+REDIS_HOST: localhost
+
+DOMAIN_URL: http://localhost:3001/api/v1
