@@ -261,3 +261,17 @@ Follow these steps to configure a Jenkins Pipeline for your GitHub repository:
 
       kubectl rollout restart deploy quick-links-deployment -n quick-links
    ```
+
+## Setting up Visualization Tools
+14.  In the downloaded istio folder you can find the `istio-1.21.1/samples/addons` directory.
+
+   This directory contains the manifests for the Istio addons.
+   Install the addons
+
+   ```bash
+      kubectl apply -f istio-1.21.1/samples/addons/
+   ```
+15. Access Kiali Dashboard
+    ```bash
+    kubectl port-forward --namespace istio-system svc/kiali 20001     
+    ```
