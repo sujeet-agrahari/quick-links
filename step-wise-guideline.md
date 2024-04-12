@@ -225,3 +225,39 @@ Follow these steps to configure a Jenkins Pipeline for your GitHub repository:
    - Specify the desired version and ensure that the checkbox for "Install automatically" is selected.
 
 ![Enable Nodejs](./dbschema/image1.png)
+
+## Setting up Istio Service Mesh
+---
+10. Install Istio locally
+   ```bash
+      # download the binary
+      curl -L https://istio.io/downloadIstio | sh -   
+
+      # add the binary to your path
+      export PATH="$PATH:/Users/username/istio-1.21.1/bin" 
+
+      # begin the Istio pre-installation check by running:
+      istioctl x precheck                                  
+   ```
+11. Install the Istio Service Mesh inside the cluster
+    ```bash
+      # install the istio service mesh into the cluster
+      istioctl install 
+      # check for the status
+      istioctl analyze   
+    ```
+12. Attach the labels to the namespace to enable service mesh
+   ```bash
+      kubectl label ns default istio-injection=enabled # kong is deployed in this namespace
+      kubectl label ns quick-links istio-injection=enabled # quick-links service is deployed into this namespace
+   
+      # check if the labels are added
+      kubectl get ns quick-links --show-labels
+      kubectl get ns default --show-labels
+   ```
+13. Restart the deployments to enable the sidecar injection
+   ```bash
+      kubectl rollout restart deploy kong-kong
+
+      kubectl rollout restart deploy quick-links-deployment -n quick-links
+   ```
