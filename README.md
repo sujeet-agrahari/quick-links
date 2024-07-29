@@ -1,6 +1,27 @@
-# Quick Links
+### Table Of Contents
 
----
+- [Quick Links](#quick-links)
+  - [Important Guidelines](#important-guidelines)
+    - [Resources for Learning Kubernetes](#resources-for-learning-kubernetes)
+    - [Deployment Resources](#deployment-resources)
+    - [Helm And ArgoCD](#helm-and-argocd)
+  - [Database setup](#database-setup)
+  - [Installation](#installation)
+  - [Running the application](#running-the-application)
+  - [Test the application](#test-the-application)
+  - [Debugging the application](#debugging-the-application)
+  - [Deployment](#deployment)
+    - [Prerequisites](#prerequisites)
+    - [Setup PostgreSQL cluster](#setup-postgresql-cluster)
+    - [Setup Redis cluster](#setup-redis-cluster)
+    - [Setup Kubernetes dashboard](#setup-kubernetes-dashboard)
+    - [Setup Kong](#setup-kong)
+    - [Setup Argocd](#setup-argocd)
+    - [Create Ingress for accessing service via Kong](#create-ingress-for-accessing-service-via-kong)
+    - [Deploy the app using argo cd](#deploy-the-app-using-argo-cd)
+    - [Setting up Jenkins Pipeline with GitHub Integration](#setting-up-jenkins-pipeline-with-github-integration)
+
+# Quick Links
 
 Welcome to the Nest.js URL Shortener GitHub repository! This is a powerful and scalable solution designed to make shortening long URLs a breeze. The system has been deployed on a Kubernetes cluster, ensuring high availability and easy scalability. The URL Shortener utilizes the power of PostgreSQL for data storage and Redis for caching, providing a high-performance and reliable storage solution.
 
@@ -8,16 +29,28 @@ This repository provides an easy-to-deploy, open-source solution for anyone look
 
 Feel free to explore the codebase and leverage the powerful technologies used in this project for your own URL shortening needs.
 
-> [!IMPORTANT]  
-> For step wise guidelines please follow [Step Wise Guidelines](#deployment)
->
-> Learn about kubernetes in depth through the slides [Kubernetes](https://docs.google.com/presentation/d/1b_qoklJet4gUJBTFMud9JVrgqwGvI_uPyR1qWGcfDfk/edit?usp=sharing)
->
-> To practice important concepts first follow [kubernetes-playground](./kubernetes-playground.md)
->
-> The charts for the deployment are hosted at [quick-links-charts](https://github.com/sujeet-agrahari/quick-links-chart)
->
-> For learning more on Helm and ArgoCD follow [Helm & ArgoCD](./helm-and-argocd.md)
+## Important Guidelines
+
+### Resources for Learning Kubernetes
+
+- **In-Depth Kubernetes Slides:**  
+  Learn about Kubernetes in detail with our comprehensive slides:  
+  [View the Kubernetes Presentation](https://docs.google.com/presentation/d/1b_qoklJet4gUJBTFMud9JVrgqwGvI_uPyR1qWGcfDfk/edit?usp=sharing)
+
+- **Hands-On Kubernetes Practice:**  
+  To practice key concepts and solidify your understanding, explore our [Kubernetes Playground](./kubernetes-playground.md).
+
+### Deployment Resources
+
+- **Deployment Charts:**  
+  The charts for the deployment process are available at:  
+  [Quick Links Charts Repository](https://github.com/sujeet-agrahari/quick-links-chart)
+
+### Helm And ArgoCD
+
+- **Helm and ArgoCD:**  
+  For additional insights on Helm and ArgoCD, consult our detailed guide:  
+  [Helm & ArgoCD Guide](./helm-and-argocd.md)
 
 ## Database setup
 
@@ -30,7 +63,7 @@ The directory named **dbschema** includes a file named `quick-links.sql`, which 
 $ npm install
 ```
 
-## Running the app
+## Running the application
 
 ```bash
 # run redis and postgres
@@ -48,7 +81,7 @@ $ npm run start:prod
 
 _You can access the API documentation by visiting http://localhost:3000/api once the application is running._
 
-## Test
+## Test the application
 
 ```bash
 # unit tests
@@ -62,7 +95,7 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Debug
+## Debugging the application
 
 Add below configuration in `launch.json` vscode.
 
@@ -99,14 +132,14 @@ We have two main directories to handles all of the deployment/setup tasks
 - deploy: It has the deployment related files: `helm` chart and argocd `application` file
 - kubernetes: It will have `kong` related setup files and `kubernetes` dashboard setup files
 
-## Prerequisites
+### Prerequisites
 
 1. Make sure you have latest docker desktop version installed
 2. Enable kubernetes
 3. Install helm: `brew install helm`
 4. Install `kubectl`: `brew install kubernetes-cli`
 
-## Setup PostgreSQL cluster
+### Setup PostgreSQL cluster
 
 ```sh
 # step 1
@@ -150,7 +183,7 @@ kubectl port-forward --namespace postgres svc/postgres-postgresql-ha-pgpool 5433
 kubectl port-forward --namespace postgres svc/postgres-postgresql-ha-pgpool 5433:5432 &
 ```
 
-## Setup Redis cluster
+### Setup Redis cluster
 
 ```sh
 # Install redis - single mast and multiple slaves
@@ -172,7 +205,7 @@ kubectl get secret --namespace default redis -o jsonpath="{.data.redis-password}
 kubectl port-forward --namespace redis svc/redis-master 6379:6379 &
 ```
 
-## Setup Kubernetes dashboard
+### Setup Kubernetes dashboard
 
 ```sh
 helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
@@ -198,14 +231,14 @@ kubectl proxy
 
 ```
 
-## Setup Kong
+### Setup Kong
 
 ```sh
 # default namesapce
 helm install kong kong/kong  --set admin.useTLS=false,admin.enabled=true,admin.http.enabled=true,env.admin_gui_path=/kong-manager,env.admin_gui_url=http://localhost/kong-manager,env.admin_gui_api_url=http://localhost/kong-admin
 ```
 
-## Setup Argocd
+### Setup Argocd
 
 ```sh
 kubectl create namespace argocd
@@ -232,7 +265,7 @@ echo NkZoc3E0RW45OTZDRDlJdg== | base64 --decode
 
 ```
 
-## Create Ingress for accessing service via Kong
+### Create Ingress for accessing service via Kong
 
 ```
 kubectl apply -f kubernetes/kong/argocd-ingress.yaml
@@ -241,7 +274,7 @@ kubectl apply -f kubernetes/kong/kong-manager-ingress.yaml
 kubectl apply -f kubernetes/kong/quick-links-ingress.yaml
 ```
 
-## Deploy the app using argo cd
+### Deploy the app using argo cd
 
 ```sh
 # Make sure you build the app first
@@ -250,7 +283,7 @@ docker build . --target dev -t quick-links:dev
 kubectl apply -f deploy/application.yaml
 ```
 
-## Setting up Jenkins Pipeline with GitHub Integration
+### Setting up Jenkins Pipeline with GitHub Integration
 
 ```sh
 brew install jenkins
