@@ -59,9 +59,6 @@ pipeline {
     
     post {
          success {
-            stages {
-            stage('Trigger ArgoCD Redeployment') {
-                steps {
                     script {
                         def payload = [
                             "revision": "develop",
@@ -71,7 +68,6 @@ pipeline {
                                 ]
                             ]
                         ]
-
                         // Trigger the ArgoCD sync operation
                         def response = httpRequest(
                             consoleLogResponseBody: true,
@@ -84,9 +80,6 @@ pipeline {
 
                         echo "ArgoCD sync response: ${response.content}"
                     }
-                }
-            }
-        }
         }
         always {
             sh 'docker logout'
