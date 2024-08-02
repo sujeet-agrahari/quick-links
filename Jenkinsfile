@@ -9,6 +9,7 @@ pipeline {
         DOCKERFILE_PATH = "Dockerfile"
         GITHUB_USERNAME = "sujeet-agrahari"
         GITHUB_TOKEN = credentials('github_jenkins_token')
+        ARGOCD_CREDS = credentials('argocd-credentials')
         PACKAGE_NAME = "quick-links"
         PACKAGE_VERSION = "1.0.0"
     }
@@ -58,8 +59,37 @@ pipeline {
     }
     
     post {
+         success {
+            stage('Trigger ArgoCD Redeployment') {
+                steps {
+                    script {
+                        def payload = [
+                            "revision": "develop",
+                            "strategy": {
+                                "apply": {
+                                    "force": true
+                                }
+                            }
+                        ]
+
+                        // Trigger the ArgoCD sync operation
+                        def response = httpRequest(
+                            consoleLogResponseBody: true,
+                            contentType: 'APPLICATION_JSON',
+                            httpMode: 'POST',
+                            url: "http://localhost/argocd/api/v1/applications/quick-links-argocd-app/sync",
+                            authentication: ARGOCD_CREDS, // Jenkins credentials ID for ArgoCD username and password
+                            requestBody: groovy.json.JsonOutput.toJson(payload)
+                        )
+
+                        echo "ArgoCD sync response: ${response.content}"
+                    }
+                }
+            }
+        }
         always {
             sh 'docker logout'
         }
+
     }
 }
