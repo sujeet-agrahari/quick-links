@@ -51,7 +51,6 @@ pipeline {
                     // Tag Docker image for GitHub Packages
                     sh "docker tag ${DOCKER_IMAGE_NAME}:${APP_VERSION} ghcr.io/${GITHUB_USERNAME}/${DOCKER_IMAGE_NAME}:${APP_VERSION}"
                     
-                    // Push Docker image to GitHub Packages
                     sh "docker push ghcr.io/${GITHUB_USERNAME}/${DOCKER_IMAGE_NAME}:${APP_VERSION}"
                 }
             }
