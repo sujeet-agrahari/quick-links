@@ -74,7 +74,7 @@ pipeline {
                             contentType: 'APPLICATION_JSON',
                             httpMode: 'POST',
                             url: "http://localhost/argocd/api/v1/applications/quick-links-argocd-app/sync",
-                            authentication: ARGOCD_CREDS, // Jenkins credentials ID for ArgoCD username and password
+                            authentication:'argocd-credentials', // Jenkins credentials ID for ArgoCD username and password
                             requestBody: groovy.json.JsonOutput.toJson(payload)
                         )
 
