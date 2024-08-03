@@ -74,7 +74,7 @@ pipeline {
                             contentType: 'APPLICATION_JSON',
                             httpMode: 'POST',
                             url: "http://localhost/argocd/api/v1/applications/quick-links-argocd-app/sync",
-                            authentication:'argocd-credentials', // Jenkins credentials ID for ArgoCD username and password
+                            customHeaders: [[name: 'Authorization', value: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhcmdvY2QiLCJzdWIiOiJhZG1pbjpsb2dpbiIsImV4cCI6MTcyMjczNzI3MSwibmJmIjoxNzIyNjUwODcxLCJpYXQiOjE3MjI2NTA4NzEsImp0aSI6ImU4NGI5YjExLWE2NjMtNGJmNS04MzNlLTY3Mjc1MTUyNjkzZSJ9.8RW_U-zUEOJjajLhCeILfbL67V52Q9YA4hQudrx_xno"]], // Jenkins credentials ID for ArgoCD username and password
                             requestBody: groovy.json.JsonOutput.toJson(payload)
                         )
 
