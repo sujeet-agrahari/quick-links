@@ -64,7 +64,7 @@ pipeline {
                             "revision": "develop",
                             "strategy": [
                                 "apply": [
-                                    "replace": true
+                                    "prune": true
                                 ]
                             ]
                         ]
