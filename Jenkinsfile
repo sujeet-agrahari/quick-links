@@ -64,7 +64,7 @@ pipeline {
                             "revision": "develop",
                             "strategy": [
                                 "apply": [
-                                    "force": true
+                                    "replace": true
                                 ]
                             ]
                         ]
