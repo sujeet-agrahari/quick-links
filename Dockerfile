@@ -1,5 +1,5 @@
 # Use node base image with tag 18-slim
-FROM node:20-slim as base
+FROM node:20-slim AS base
 
 # Set NODE_ENV environment variable to production
 ENV NODE_ENV=production
@@ -24,13 +24,13 @@ COPY --chown=node:node package*.json ./
 RUN npm ci && npm cache clean --force
 
 # Set PATH environment variable in dev stage
-ENV PATH /app/node_modules/.bin:$PATH
+ENV PATH=/app/node_modules/.bin:$PATH
 
 # Copy source code
 COPY --chown=node:node . .
 
 # Development stage
-FROM base as dev
+FROM base AS dev
 
 # Set NODE_ENV environment variable to development
 ENV NODE_ENV=development
@@ -39,7 +39,7 @@ ENV NODE_ENV=development
 CMD ["npm", "run", "start:dev"]
 
 # Production stage
-FROM base as prod
+FROM base AS prod
 
 # Build production code
 RUN npm run build
